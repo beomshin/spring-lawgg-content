@@ -27,50 +27,26 @@ public class KafkaConsumerConfig {
     @Value("${kafka.consumer.autoOffsetResetConfig}")
     private String autoOffsetResetConfig;
 
-    @Value("${kafka.consumer.alarm.rdb-group-id}")
-    private String rdbGroupId;
-
-    @Value("${kafka.consumer.alarm.redis-group-id}")
-    private String redisGroupId;
 
     @Bean
-    @Qualifier("alarmEventRDBConsumerFactory")
-    public ConsumerFactory<String, String> alarmEventRDBConsumerFactory() {
+    public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, rdbGroupId);
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetResetConfig);
-        return new DefaultKafkaConsumerFactory<>(props,
-                new StringDeserializer(),
-                new JsonDeserializer<>(String.class));
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetResetConfig); // 가장 최신의 offset 부터 consuming
+
+        return new DefaultKafkaConsumerFactory<>(props);
     }
 
     @Bean
-    public ConsumerFactory<String, String> alarmEventRedisConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, redisGroupId);
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetResetConfig);
-        return new DefaultKafkaConsumerFactory<>(props,
-                new StringDeserializer(),
-                new JsonDeserializer<>(String.class));
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactoryRDB() {
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(alarmEventRDBConsumerFactory());
+        factory.setConsumerFactory(consumerFactory());
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
         return factory;
     }
 
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactoryRedis() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(alarmEventRedisConsumerFactory());
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
-        return factory;
-    }
+
 }

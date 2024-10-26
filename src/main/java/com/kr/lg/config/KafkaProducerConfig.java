@@ -20,11 +20,6 @@ public class KafkaProducerConfig {
     @Value("${kafka.bootstrapAddress}")
     private String bootstrapServers;
 
-    /**
-     * ack: all
-     * In-Sync-Replica에 모두 event가 저장되었음이 확인 되어야 ack 신호를 보냄 가장 성능은 떨어지지만
-     * event produce를 보장할 수 있음.
-     */
     @Value("${kafka.producer.acksConfig}")
     private String acksConfig;
 
@@ -33,31 +28,28 @@ public class KafkaProducerConfig {
 
     @Value("${kafka.producer.enable-idempotence}")
     private Boolean enableIdempotence;
+
     @Value("${kafka.producer.max-in-flight-requests-per-connection}")
     private Integer maxInFlightRequestsPerConnection;
 
-    /**
-     * enable.idempotence true를 위해서는 retry가 0이상,
-     * max.in.flight.requests.per.connection 은 5이하여야한다.
-     * @return
-     */
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.ACKS_CONFIG, acksConfig);
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        configProps.put(ProducerConfig.RETRIES_CONFIG, retry);
-        configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempotence);
-        configProps.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, maxInFlightRequestsPerConnection);
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers); // 서버 설정
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class); // key serializer
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class); // value serializer
+
+        configProps.put(ProducerConfig.ACKS_CONFIG, acksConfig); // 메세지 ack 설정 (0:기다리지않음, 1: 리더메세지 기다림, -1: 전부 기다림)
+        configProps.put(ProducerConfig.RETRIES_CONFIG, retry); // retry
+        configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempotence); // 멱등성 프로듀스 사용
+        configProps.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, maxInFlightRequestsPerConnection); // connection request 제한수 (기본 5개, 1개면 순서보장, 높을수록 메모리 소모)
 
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
-        return new KafkaTemplate<String, String>(producerFactory());
+        return new KafkaTemplate<>(producerFactory());
     }
 
 }
