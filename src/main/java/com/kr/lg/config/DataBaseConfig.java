@@ -30,7 +30,7 @@ import java.util.Objects;
 public class DataBaseConfig {
 
 
-    public static final String REPOSITORY_PACKAGE = "com.kr.lg.domain.repositories";
+    public static final String REPOSITORY_PACKAGE = "com.kr.lg.adapter.out.persistence.repository";
 
     private final JpaProperties jpaProperties;
     private final HibernateProperties hibernateProperties;
@@ -66,7 +66,7 @@ public class DataBaseConfig {
         Map<String, Object> properties = hibernateProperties.determineHibernateProperties(jpaProperties.getProperties(), new HibernateSettings());
         return builder
                 .dataSource(dataSource)
-                .packages("com.kr.lg.domain.entities")
+                .packages("com.kr.lg.adapter.out.persistence.entities")
                 .persistenceUnit("entityManager")
                 .properties(properties)
                 .build();
