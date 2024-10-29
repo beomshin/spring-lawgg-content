@@ -8,7 +8,7 @@ import lombok.ToString;
 
 @ToString(callSuper=true, exclude = {"article"})
 @Entity(name = "article_attach")
-public class ArticleAttach extends BaseEntity {
+public class ArticleAttachEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,7 +16,7 @@ public class ArticleAttach extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
-    private Article article;
+    private ArticleEntity articleEntity;
 
     @Column(name = "path")
     private String path;

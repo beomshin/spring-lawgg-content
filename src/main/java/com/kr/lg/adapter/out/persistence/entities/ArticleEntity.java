@@ -8,7 +8,7 @@ import lombok.ToString;
 @Entity(name = "article")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "dtype") // 조인 전략 설정 컬럼
-public abstract class Article extends BaseEntity {
+public abstract class ArticleEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

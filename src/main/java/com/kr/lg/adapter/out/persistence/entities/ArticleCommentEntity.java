@@ -8,7 +8,7 @@ import lombok.ToString;
 
 @ToString(callSuper=true, exclude = {"article"})
 @Entity(name = "article_commet")
-public class ArticleComment extends BaseEntity {
+public class ArticleCommentEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,7 +16,7 @@ public class ArticleComment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
-    private Article article;
+    private ArticleEntity articleEntity;
 
     @Column(name = "user_id")
     private Long userId;

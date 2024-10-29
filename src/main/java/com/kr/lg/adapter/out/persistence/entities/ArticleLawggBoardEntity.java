@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @Entity(name = "article_lawgg_board")
 @DiscriminatorValue("0")
-public class ArticleLawggBoard extends Article {
+public class ArticleLawggBoardEntity extends ArticleEntity {
 
     @Column(name = "law_firm_id")
     private Long lawFirmId;
