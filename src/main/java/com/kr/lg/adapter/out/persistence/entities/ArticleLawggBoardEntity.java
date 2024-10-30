@@ -12,11 +12,18 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.DynamicInsert;
 
+@Getter
+@SuperBuilder
 @ToString(callSuper = true)
 @Entity(name = "article_lawgg_board")
 @DiscriminatorValue("0")
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamicInsert
 public class ArticleLawggBoardEntity extends ArticleEntity {
 
     @Column(name = "law_firm_id")
