@@ -1,6 +1,9 @@
 package com.kr.lg.application.port.in.command;
 
 import com.kr.lg.adapter.in.kafka.msg.ArticleMsg;
+import com.kr.lg.adapter.out.persistence.entities.enums.LineType;
+import com.kr.lg.adapter.out.persistence.entities.enums.PostType;
+import com.kr.lg.adapter.out.persistence.entities.enums.WriterType;
 import lombok.*;
 
 @Getter
@@ -23,6 +26,16 @@ public class ArticleInsertCommand {
 
     private String ip;
 
+    private Long lawFirmId;
+
+    private String password;
+
+    private PostType postType;
+
+    private WriterType writerType;
+
+    private LineType lineType;
+
 
     public static ArticleInsertCommand of(ArticleMsg articleMsg) {
         return ArticleInsertCommand
@@ -33,6 +46,11 @@ public class ArticleInsertCommand {
                 .desc(articleMsg.getDesc())
                 .dtype(articleMsg.getDtype())
                 .ip(articleMsg.getIp())
+                .lawFirmId(articleMsg.getLawFirmId())
+                .password(articleMsg.getPassword())
+                .postType(PostType.getInstance(articleMsg.getPostType()))
+                .writerType(WriterType.getInstance(articleMsg.getWriterType()))
+                .lineType(LineType.getInstance(articleMsg.getLineType()))
                 .build();
     }
 }

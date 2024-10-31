@@ -9,6 +9,7 @@ import com.kr.lg.application.port.out.InsertArticleBoardPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -19,12 +20,12 @@ public class ArticlePersistenceAdapter implements InsertArticleBoardPort {
     private final ArticleLawggBoardJpaRepo articleLawggBoardJpaRepo;
 
     @Override
+    @Transactional
     public void insertArticleBoard(ArticleLawggBoard board) {
-
-        ArticleLawggBoardEntity boardEntity= articleBoardMapper.mapToJpaEntity(board);
-
+        log.info("◆ 게시판 등록 영속성 로직 수행");
+        ArticleLawggBoardEntity boardEntity = articleBoardMapper.mapToJpaEntity(board); // domain -> entity 객체로 변경
+        log.info("◆ 게시판 영속성 엔티티 저장 수행");
         articleLawggBoardJpaRepo.save(boardEntity);
-
     }
 
 }

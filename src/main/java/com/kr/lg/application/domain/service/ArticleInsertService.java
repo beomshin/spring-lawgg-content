@@ -19,11 +19,9 @@ public class ArticleInsertService implements ArticleInsertUseCase {
 
     @Override
     public void enroll(ArticleInsertCommand command) {
-
-        ArticleLawggBoard board = articleBoardMapper.commandToDomainEntity(command);
-
+        log.info("◆ 게시판 등록 도메인 로직 수행");
+        ArticleLawggBoard board = articleBoardMapper.commandToDomainEntity(command); // command -> domain 객체 변경
         insertArticleBoardPort.insertArticleBoard(board);
-
     }
 
 }

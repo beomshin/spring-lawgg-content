@@ -19,4 +19,14 @@ public class ArticleMsg {
 
     private String ip;
 
+    private Long lawFirmId;
+
+    private String password;
+
+    private Integer postType;
+
+    private Integer writerType;
+
+    private Integer lineType;
+
 }

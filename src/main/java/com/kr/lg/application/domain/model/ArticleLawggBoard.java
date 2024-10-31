@@ -1,5 +1,8 @@
 package com.kr.lg.application.domain.model;
 
+import com.kr.lg.adapter.out.persistence.entities.enums.LineType;
+import com.kr.lg.adapter.out.persistence.entities.enums.PostType;
+import com.kr.lg.adapter.out.persistence.entities.enums.WriterType;
 import lombok.*;
 
 @ToString
@@ -23,5 +26,14 @@ public class ArticleLawggBoard {
 
     private String ip;
 
+    private Long lawFirmId;
+
+    private String password;
+
+    private PostType postType;
+
+    private WriterType writerType;
+
+    private LineType lineType;
 
 }
