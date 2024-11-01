@@ -1,5 +1,6 @@
 package com.kr.lg.application.domain.model;
 
+import com.kr.lg.adapter.out.persistence.entities.enums.DType;
 import com.kr.lg.adapter.out.persistence.entities.enums.LineType;
 import com.kr.lg.adapter.out.persistence.entities.enums.PostType;
 import com.kr.lg.adapter.out.persistence.entities.enums.WriterType;
@@ -22,7 +23,7 @@ public class ArticleLawggBoard {
 
     private String desc;
 
-    private Integer dtype;
+    private DType dtype;
 
     private String ip;
 

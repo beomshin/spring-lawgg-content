@@ -16,10 +16,12 @@ public enum LineType {
 
     int code;
 
-    public static LineType getInstance(int code) {
-        for (LineType lineType : values()) {
-            if (lineType.getCode() == code) {
-                return lineType;
+    public static LineType of(Integer code) {
+        if (code != null) {
+            for (LineType lineType : values()) {
+                if (lineType.getCode() == code) {
+                    return lineType;
+                }
             }
         }
         return null;

@@ -1,7 +1,10 @@
 package com.kr.lg.application.domain.service;
 
+import com.kr.lg.adapter.out.persistence.entities.enums.DType;
 import com.kr.lg.adapter.out.persistence.mapper.ArticleBoardMapper;
+import com.kr.lg.adapter.out.persistence.mapper.ArticleTrialMapper;
 import com.kr.lg.application.domain.model.ArticleLawggBoard;
+import com.kr.lg.application.domain.model.ArticleLawggTrial;
 import com.kr.lg.application.port.in.ArticleInsertUseCase;
 import com.kr.lg.application.port.in.command.ArticleInsertCommand;
 import com.kr.lg.application.port.out.InsertArticleBoardPort;
@@ -16,12 +19,22 @@ public class ArticleInsertService implements ArticleInsertUseCase {
 
     private final InsertArticleBoardPort insertArticleBoardPort;
     private final ArticleBoardMapper articleBoardMapper;
+    private final ArticleTrialMapper articleTrialMapper;
 
     @Override
     public void enroll(ArticleInsertCommand command) {
         log.info("◆ 게시판 등록 도메인 로직 수행");
-        ArticleLawggBoard board = articleBoardMapper.commandToDomainEntity(command); // command -> domain 객체 변경
-        insertArticleBoardPort.insertArticleBoard(board);
+
+        if (DType.LAWGG_BOARD == command.getDtype()) {
+            ArticleLawggBoard board = articleBoardMapper.commandToDomainEntity(command); // command -> domain 객체 변경
+            insertArticleBoardPort.insertArticleLawggBoard(board);
+        } else if (DType.LAWGG_TRIAL == command.getDtype()) {
+            ArticleLawggTrial trial = articleTrialMapper.commandToDomainEntity(command); // command -> domain 객체 변경
+            insertArticleBoardPort.insertArticleLawggTrial(trial);
+        } else if (DType.FORMDANG_BOARD == command.getDtype()) {
+
+        }
+
     }
 
 }

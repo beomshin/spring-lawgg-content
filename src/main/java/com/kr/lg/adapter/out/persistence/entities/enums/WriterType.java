@@ -12,10 +12,12 @@ public enum WriterType {
 
     int code;
 
-    public static WriterType getInstance(int code) {
-        for (WriterType writerType : values()) {
-            if (writerType.getCode() == code) {
-                return writerType;
+    public static WriterType of(Integer code) {
+        if (code != null) {
+            for (WriterType writerType : values()) {
+                if (writerType.getCode() == code) {
+                    return writerType;
+                }
             }
         }
         return null;

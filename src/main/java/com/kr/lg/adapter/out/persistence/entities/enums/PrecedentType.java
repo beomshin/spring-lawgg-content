@@ -14,4 +14,14 @@ public enum PrecedentType {
 
     int code;
 
+    public static PrecedentType of(Integer code) {
+        if (code != null) {
+            for (PrecedentType precedentType : values()) {
+                if (precedentType.getCode() == code) {
+                    return precedentType;
+                }
+            }
+        }
+        return null;
+    }
 }

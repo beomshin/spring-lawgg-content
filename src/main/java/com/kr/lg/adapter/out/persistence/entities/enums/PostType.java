@@ -18,10 +18,12 @@ public enum PostType {
 
     int code;
 
-    public static PostType getInstance(int code) {
-        for (PostType postType : values()) {
-            if (postType.getCode() == code) {
-                return postType;
+    public static PostType of(Integer code) {
+        if (code != null) {
+            for (PostType postType : values()) {
+                if (postType.getCode() == code) {
+                    return postType;
+                }
             }
         }
         return null;

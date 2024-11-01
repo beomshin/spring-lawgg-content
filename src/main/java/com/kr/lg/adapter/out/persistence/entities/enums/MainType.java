@@ -13,4 +13,14 @@ public enum MainType {
 
     int code;
 
+    public static MainType of(Integer code) {
+        if (code != null) {
+            for (MainType mainType : values()) {
+                if (mainType.getCode() == code) {
+                    return mainType;
+                }
+            }
+        }
+        return null;
+    }
 }

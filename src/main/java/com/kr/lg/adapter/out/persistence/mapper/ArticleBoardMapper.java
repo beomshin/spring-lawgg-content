@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class ArticleBoardMapper {
 
     public ArticleLawggBoardEntity mapToJpaEntity(ArticleLawggBoard articleLawggBoard) {
-        log.info("◆ 도메인 객체 -> 엔티티 객체");
+        log.info("◆ LAWGG BOARD 도메인 객체 -> 엔티티 객체");
         return ArticleLawggBoardEntity.builder()
                 .userId(articleLawggBoard.getUserId())
                 .title(articleLawggBoard.getTitle())
@@ -27,7 +27,7 @@ public class ArticleBoardMapper {
     }
 
     public ArticleLawggBoard mapToDomainEntity(ArticleLawggBoardEntity articleLawggBoardEntity) {
-        log.info("◆ 엔티티 객체 -> 도메인 객체");
+        log.info("◆ LAWGG BOARD 엔티티 객체 -> 도메인 객체");
         return ArticleLawggBoard.builder()
                 .userId(articleLawggBoardEntity.getUserId())
                 .title(articleLawggBoardEntity.getTitle())
@@ -43,7 +43,7 @@ public class ArticleBoardMapper {
     }
 
     public ArticleLawggBoard commandToDomainEntity(ArticleInsertCommand command) {
-        log.info("◆ 커맨드 객체 -> 도메인 객체");
+        log.info("◆ LAWGG BOARD 커맨드 객체 -> 도메인 객체");
         return ArticleLawggBoard.builder()
                 .userId(command.getUserId())
                 .title(command.getTitle())
