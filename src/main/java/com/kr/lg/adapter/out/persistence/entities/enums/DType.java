@@ -14,10 +14,12 @@ public enum DType {
 
     int code;
 
-    public static DType of(int code) {
-        for (DType dType : values()) {
-            if (dType.getCode() == code) {
-                return dType;
+    public static DType of(Integer code) {
+        if (code != null) {
+            for (DType dType : values()) {
+                if (dType.getCode() == code) {
+                    return dType;
+                }
             }
         }
         return null;

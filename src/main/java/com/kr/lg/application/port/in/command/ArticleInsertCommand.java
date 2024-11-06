@@ -2,6 +2,8 @@ package com.kr.lg.application.port.in.command;
 
 import com.kr.lg.adapter.in.kafka.msg.ArticleMsg;
 import com.kr.lg.adapter.out.persistence.entities.enums.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -12,14 +14,19 @@ public class ArticleInsertCommand {
 
     // command 객체로 외부 어댑터에서 내부 도미엔으로 보내는 객체
 
+    @NotNull(message = "userId 누락")
     private Long userId; // 유저아이디
 
+    @NotBlank(message = "title 누락")
     private String title; // 타이틀
 
+    @NotBlank(message = "writer 누락")
     private String writer; // 작성자
 
+    @NotBlank(message = "desc 누락")
     private String desc; // 디스크립션
 
+    @NotNull(message = "dtype 누락")
     private DType dtype; // 데이터 타입 (0: 게시판, 1: 트라이얼, 2: 폼)
 
     private String ip; // ip

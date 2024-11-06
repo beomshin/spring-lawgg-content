@@ -8,9 +8,11 @@ import com.kr.lg.application.domain.model.ArticleLawggTrial;
 import com.kr.lg.application.port.in.ArticleInsertUseCase;
 import com.kr.lg.application.port.in.command.ArticleInsertCommand;
 import com.kr.lg.application.port.out.InsertArticleBoardPort;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Slf4j
 @Service

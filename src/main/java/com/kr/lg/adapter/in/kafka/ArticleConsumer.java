@@ -30,14 +30,14 @@ public class ArticleConsumer {
     }
 
 
-    @KafkaListener(topics = "${kafka.topic.comment.name}", groupId = "${kafka.consumer.group-id}", containerFactory = "containerFactory")
-    public void comment(String msg, Acknowledgment ack) { // offset 커밋 조절
-        try {
-
-        } catch (Exception e) {
-            log.error("", e);
-        }
-        ack.acknowledge();
-    }
+//    @KafkaListener(topics = "${kafka.topic.comment.name}", groupId = "${kafka.consumer.group-id}", containerFactory = "containerFactory")
+//    public void comment(String msg, Acknowledgment ack) { // offset 커밋 조절
+//        try {
+//
+//        } catch (Exception e) {
+//            log.error("", e);
+//        }
+//        ack.acknowledge();
+//    }
 
 }
