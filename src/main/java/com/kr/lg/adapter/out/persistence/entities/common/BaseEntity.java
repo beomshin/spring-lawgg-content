@@ -23,10 +23,10 @@ public class BaseEntity {
 
     @Column(name = "reg_dt")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    private Timestamp regDt;
+    private Timestamp regDt; // 등록일
 
     @Column(name = "mod_dt")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    private Timestamp modDt;
+    private Timestamp modDt; // 수정일
 
 }
