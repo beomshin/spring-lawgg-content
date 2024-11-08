@@ -1,4 +1,4 @@
-package com.kr.lg.adapter.out.persistence.entities.enums;
+package com.kr.lg.adapter.out.persistence.entities.enums.formdang;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

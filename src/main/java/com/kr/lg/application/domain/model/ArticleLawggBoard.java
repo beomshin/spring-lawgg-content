@@ -1,9 +1,9 @@
 package com.kr.lg.application.domain.model;
 
 import com.kr.lg.adapter.out.persistence.entities.enums.DType;
-import com.kr.lg.adapter.out.persistence.entities.enums.LineType;
-import com.kr.lg.adapter.out.persistence.entities.enums.PostType;
-import com.kr.lg.adapter.out.persistence.entities.enums.WriterType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.LineType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.PostType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.WriterType;
 import lombok.*;
 
 @ToString

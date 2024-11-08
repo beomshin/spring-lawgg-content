@@ -2,9 +2,15 @@ package com.kr.lg.application.port.in.command;
 
 import com.kr.lg.adapter.in.kafka.msg.ArticleMsg;
 import com.kr.lg.adapter.out.persistence.entities.enums.*;
+import com.kr.lg.adapter.out.persistence.entities.enums.formdang.FormType;
+import com.kr.lg.adapter.out.persistence.entities.enums.formdang.LoginFlag;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.apache.commons.lang.StringUtils;
+
+import java.sql.Timestamp;
 
 @Getter
 @Builder
@@ -67,9 +73,23 @@ public class ArticleInsertCommand {
 
     private MainType mainType; // 메인 트라이얼 게시 여부 ( 0: 일반, 1: 메인 )
 
+    private FormType formType; // 폼 타입 ( 0: 설문, 1: 퀴즈, 2: 쪽지시험 )
+
+    private LoginFlag loginFlag; // 로그인 플래그 (0: 비로그인, 1: 로그인)
+
+    private Timestamp beginDt; // 폼 시작일
+
+    private Timestamp endDt; // 폼 종료일
+
+    private Integer maxRespondentCnt; // 인원 제한수 ( 0: 제한 없음, 1~ 제한인원)
+
+    private String logoUrl; // 로고 URL
+
+    private String themaUrl; // 테마 URL
+
 
     public static ArticleInsertCommand of(ArticleMsg articleMsg) {
-        return ArticleInsertCommand
+        ArticleInsertCommand command = ArticleInsertCommand
                 .builder()
                 .userId(articleMsg.getUserId())
                 .title(articleMsg.getTitle())
@@ -95,6 +115,22 @@ public class ArticleInsertCommand {
                 .thumbnail(articleMsg.getThumbnail())
                 .precedent(PrecedentType.of(articleMsg.getPrecedent()))
                 .mainType(MainType.of(articleMsg.getMainType()))
+                .formType(FormType.of(articleMsg.getFormType()))
+                .loginFlag(LoginFlag.of(articleMsg.getLoginFlag()))
+                .maxRespondentCnt(articleMsg.getMaxRespondentCnt())
+                .logoUrl(articleMsg.getLogoUrl())
+                .themaUrl(articleMsg.getThemaUrl())
                 .build();
+
+        if (StringUtils.isNotBlank(articleMsg.getBeginDt())) {
+            command.beginDt = Timestamp.valueOf(articleMsg.getBeginDt());
+        }
+
+        if (StringUtils.isNotBlank(articleMsg.getEndDt())) {
+            command.endDt = Timestamp.valueOf(articleMsg.getEndDt());
+        }
+
+
+        return command;
     }
 }

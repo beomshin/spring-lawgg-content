@@ -2,7 +2,9 @@ package com.kr.lg.adapter.out.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kr.lg.adapter.out.persistence.entities.converter.*;
-import com.kr.lg.adapter.out.persistence.entities.enums.*;
+import com.kr.lg.adapter.out.persistence.entities.enums.formdang.FormStatus;
+import com.kr.lg.adapter.out.persistence.entities.enums.formdang.FormType;
+import com.kr.lg.adapter.out.persistence.entities.enums.formdang.LoginFlag;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.DiscriminatorValue;

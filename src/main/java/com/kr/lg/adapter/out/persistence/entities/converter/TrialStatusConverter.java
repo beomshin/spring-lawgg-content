@@ -1,6 +1,6 @@
 package com.kr.lg.adapter.out.persistence.entities.converter;
 
-import com.kr.lg.adapter.out.persistence.entities.enums.TrialStatus;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.TrialStatus;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

@@ -3,6 +3,7 @@ package com.kr.lg.adapter.in.kafka.msg;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+
 @Getter
 @ToString
 @NoArgsConstructor
@@ -56,4 +57,18 @@ public class ArticleMsg {
     private Integer precedent; // 판례 ( 0: 원공 승, 1: 피고 승, 9: 진행중)
 
     private Integer mainType; // 메인 트라이얼 게시 여부 ( 0: 일반, 1: 메인 )
+
+    private Integer formType; // 폼 타입 ( 0: 설문, 1: 퀴즈, 2: 쪽지시험 )
+
+    private Integer loginFlag; // 로그인 플래그 (0: 비로그인, 1: 로그인)
+
+    private String beginDt; // 폼 시작일
+
+    private String endDt; // 폼 종료일
+
+    private Integer maxRespondentCnt; // 인원 제한수 ( 0: 제한 없음, 1~ 제한인원)
+
+    private String logoUrl; // 로고 URL
+
+    private String themaUrl; // 테마 URL
 }

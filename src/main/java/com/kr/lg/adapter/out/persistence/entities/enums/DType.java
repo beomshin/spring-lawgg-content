@@ -9,7 +9,7 @@ public enum DType {
 
     LAWGG_BOARD(0),
     LAWGG_TRIAL(1),
-    FORMDANG_BOARD(2)
+    FORM(2)
     ;
 
     int code;

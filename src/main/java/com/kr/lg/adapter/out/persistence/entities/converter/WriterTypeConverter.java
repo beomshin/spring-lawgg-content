@@ -1,6 +1,6 @@
 package com.kr.lg.adapter.out.persistence.entities.converter;
 
-import com.kr.lg.adapter.out.persistence.entities.enums.WriterType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.WriterType;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

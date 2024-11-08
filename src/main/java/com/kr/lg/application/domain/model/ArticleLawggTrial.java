@@ -3,6 +3,10 @@ package com.kr.lg.application.domain.model;
 
 import com.kr.lg.adapter.out.persistence.entities.enums.*;
 
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.MainType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.PostType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.PrecedentType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.TrialStatus;
 import lombok.*;
 
 @ToString

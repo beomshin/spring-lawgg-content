@@ -4,10 +4,10 @@ import com.kr.lg.adapter.out.persistence.entities.converter.BoardStatusConverter
 import com.kr.lg.adapter.out.persistence.entities.converter.LineTypeConverter;
 import com.kr.lg.adapter.out.persistence.entities.converter.PostTypeConverter;
 import com.kr.lg.adapter.out.persistence.entities.converter.WriterTypeConverter;
-import com.kr.lg.adapter.out.persistence.entities.enums.BoardStatus;
-import com.kr.lg.adapter.out.persistence.entities.enums.LineType;
-import com.kr.lg.adapter.out.persistence.entities.enums.PostType;
-import com.kr.lg.adapter.out.persistence.entities.enums.WriterType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.BoardStatus;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.LineType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.PostType;
+import com.kr.lg.adapter.out.persistence.entities.enums.lawgg.WriterType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.DiscriminatorValue;
