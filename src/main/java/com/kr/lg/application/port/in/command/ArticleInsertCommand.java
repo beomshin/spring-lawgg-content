@@ -20,7 +20,6 @@ public class ArticleInsertCommand {
 
     // command 객체로 외부 어댑터에서 내부 도미엔으로 보내는 객체
 
-    @NotNull(message = "userId 누락")
     private Long userId; // 유저아이디
 
     @NotBlank(message = "title 누락")
@@ -129,7 +128,6 @@ public class ArticleInsertCommand {
         if (StringUtils.isNotBlank(articleMsg.getEndDt())) {
             command.endDt = Timestamp.valueOf(articleMsg.getEndDt());
         }
-
 
         return command;
     }
