@@ -21,9 +21,8 @@ public class ArticleCommentEntity extends BaseEntity {
     @Column(name = "id")
     private Long id; // 식별자
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
-    private ArticleEntity articleEntity; // article key
+    private Long articleId; // article key
 
     @Column(name = "user_id")
     private Long userId; // 유저아이디

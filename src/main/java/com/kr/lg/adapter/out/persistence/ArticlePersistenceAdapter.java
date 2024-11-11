@@ -10,6 +10,7 @@ import com.kr.lg.adapter.out.persistence.mapper.ArticleTrialMapper;
 import com.kr.lg.adapter.out.persistence.repository.ArticleFormJpaRepo;
 import com.kr.lg.adapter.out.persistence.repository.ArticleLawggBoardJpaRepo;
 import com.kr.lg.adapter.out.persistence.repository.ArticleLawggTrialJpaRepo;
+import com.kr.lg.application.domain.model.ArticleComment;
 import com.kr.lg.application.domain.model.ArticleForm;
 import com.kr.lg.application.domain.model.ArticleLawggBoard;
 import com.kr.lg.application.domain.model.ArticleLawggTrial;
@@ -56,6 +57,11 @@ public class ArticlePersistenceAdapter implements InsertArticleBoardPort {
         ArticleFormEntity formEntity = articleFormMapper.mapToJpaEntity(form); // domain -> entity 객체로 변경
         log.info("◆ 폼당폼당 FORM 게시판 영속성 엔티티 저장 수행");
         articleFormJpaRepo.save(formEntity);
+    }
+
+    @Override
+    public void insertArticleComment(ArticleComment comment) {
+
     }
 
 }

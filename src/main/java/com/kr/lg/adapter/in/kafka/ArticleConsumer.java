@@ -1,8 +1,10 @@
 package com.kr.lg.adapter.in.kafka;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kr.lg.adapter.in.kafka.msg.ArticleCommentMsg;
 import com.kr.lg.adapter.in.kafka.msg.ArticleMsg;
 import com.kr.lg.application.port.in.ArticleInsertUseCase;
+import com.kr.lg.application.port.in.command.ArticleCommentInsertCommand;
 import com.kr.lg.application.port.in.command.ArticleInsertCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,14 +32,16 @@ public class ArticleConsumer {
     }
 
 
-//    @KafkaListener(topics = "${kafka.topic.comment.name}", groupId = "${kafka.consumer.group-id}", containerFactory = "containerFactory")
-//    public void comment(String msg, Acknowledgment ack) { // offset 커밋 조절
-//        try {
-//
-//        } catch (Exception e) {
-//            log.error("", e);
-//        }
-//        ack.acknowledge();
-//    }
+    @KafkaListener(topics = "${kafka.topic.article.comment.name}", groupId = "${kafka.consumer.group-id}", containerFactory = "containerFactory")
+    public void comment(String msg, Acknowledgment ack) { // offset 커밋 조절
+        try {
+            log.info("◆ 댓글 등록 카프카 메세지 consumer 시작");
+            articleInsertUseCase.enrollComment(ArticleCommentInsertCommand.of(new ObjectMapper().readValue(msg, ArticleCommentMsg.class)));
+            log.info("◆ 댓글 등록 카프카 메세지 consumer 종료");
+        } catch (Exception e) {
+            log.error("", e);
+        }
+        ack.acknowledge();
+    }
 
 }

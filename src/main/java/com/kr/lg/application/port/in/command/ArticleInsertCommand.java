@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.sql.Timestamp;
 
+@ToString
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

@@ -2,12 +2,15 @@ package com.kr.lg.application.domain.service;
 
 import com.kr.lg.adapter.out.persistence.entities.enums.DType;
 import com.kr.lg.adapter.out.persistence.mapper.ArticleBoardMapper;
+import com.kr.lg.adapter.out.persistence.mapper.ArticleCommentMapper;
 import com.kr.lg.adapter.out.persistence.mapper.ArticleFormMapper;
 import com.kr.lg.adapter.out.persistence.mapper.ArticleTrialMapper;
+import com.kr.lg.application.domain.model.ArticleComment;
 import com.kr.lg.application.domain.model.ArticleForm;
 import com.kr.lg.application.domain.model.ArticleLawggBoard;
 import com.kr.lg.application.domain.model.ArticleLawggTrial;
 import com.kr.lg.application.port.in.ArticleInsertUseCase;
+import com.kr.lg.application.port.in.command.ArticleCommentInsertCommand;
 import com.kr.lg.application.port.in.command.ArticleInsertCommand;
 import com.kr.lg.application.port.out.InsertArticleBoardPort;
 
@@ -24,6 +27,7 @@ public class ArticleInsertService implements ArticleInsertUseCase {
     private final ArticleBoardMapper articleBoardMapper;
     private final ArticleTrialMapper articleTrialMapper;
     private final ArticleFormMapper articleFormMapper;
+    private final ArticleCommentMapper articleCommentMapper;
 
     @Override
     public void enroll(ArticleInsertCommand command) {
@@ -40,6 +44,12 @@ public class ArticleInsertService implements ArticleInsertUseCase {
             insertArticleBoardPort.insertArticleForm(form);
         }
 
+    }
+
+    @Override
+    public void enrollComment(ArticleCommentInsertCommand command) {
+        ArticleComment comment = articleCommentMapper.commandToDomainEntity(command);
+        insertArticleBoardPort.insertArticleComment(comment);
     }
 
 }

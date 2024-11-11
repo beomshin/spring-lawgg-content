@@ -1,5 +1,6 @@
 package com.kr.lg.application.port.in;
 
+import com.kr.lg.application.port.in.command.ArticleCommentInsertCommand;
 import com.kr.lg.application.port.in.command.ArticleInsertCommand;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
@@ -7,4 +8,5 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public interface ArticleInsertUseCase {
     void enroll(@Valid ArticleInsertCommand command);
+    void enrollComment(@Valid ArticleCommentInsertCommand command);
 }
