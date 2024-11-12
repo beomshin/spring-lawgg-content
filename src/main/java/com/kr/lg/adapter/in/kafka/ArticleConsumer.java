@@ -1,7 +1,9 @@
 package com.kr.lg.adapter.in.kafka;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kr.lg.adapter.in.kafka.msg.ArticleCommentMsg;
+import com.kr.lg.adapter.in.kafka.msg.ArticleBody;
 import com.kr.lg.adapter.in.kafka.msg.ArticleMsg;
 import com.kr.lg.application.port.in.ArticleInsertUseCase;
 import com.kr.lg.application.port.in.command.ArticleCommentInsertCommand;
@@ -22,22 +24,14 @@ public class ArticleConsumer {
     @KafkaListener(topics = "${kafka.topic.article.name}", groupId = "${kafka.consumer.group-id}", containerFactory = "containerFactory")
     public void enroll(String msg, Acknowledgment ack) { // offset 커밋 조절
         try {
-            log.info("◆ 게시판 등록 카프카 메세지 consumer 시작");
-            articleInsertUseCase.enroll(ArticleInsertCommand.of(new ObjectMapper().readValue(msg, ArticleMsg.class)));
-            log.info("◆ 게시판 등록 카프카 메세지 consumer 종료");
-        } catch (Exception e) {
-            log.error("", e);
-        }
-        ack.acknowledge();
-    }
-
-
-    @KafkaListener(topics = "${kafka.topic.article.comment.name}", groupId = "${kafka.consumer.group-id}", containerFactory = "containerFactory")
-    public void comment(String msg, Acknowledgment ack) { // offset 커밋 조절
-        try {
-            log.info("◆ 댓글 등록 카프카 메세지 consumer 시작");
-            articleInsertUseCase.enrollComment(ArticleCommentInsertCommand.of(new ObjectMapper().readValue(msg, ArticleCommentMsg.class)));
-            log.info("◆ 댓글 등록 카프카 메세지 consumer 종료");
+            log.info("◆ Article 카프카 메세지 consumer 시작");
+            ArticleMsg articleMsg = new ObjectMapper().readValue(msg, ArticleMsg.class);
+            if (articleMsg.isArticle()) {
+                articleInsertUseCase.enroll(ArticleInsertCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleBody.class)));
+            } else if (articleMsg.isArticleComment()) {
+                articleInsertUseCase.enrollComment(ArticleCommentInsertCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleCommentMsg.class)));
+            }
+            log.info("◆ Article 카프카 메세지 consumer 종료");
         } catch (Exception e) {
             log.error("", e);
         }

@@ -1,6 +1,6 @@
 package com.kr.lg.application.port.in.command;
 
-import com.kr.lg.adapter.in.kafka.msg.ArticleMsg;
+import com.kr.lg.adapter.in.kafka.msg.ArticleBody;
 import com.kr.lg.adapter.out.persistence.entities.enums.*;
 import com.kr.lg.adapter.out.persistence.entities.enums.formdang.FormType;
 import com.kr.lg.adapter.out.persistence.entities.enums.formdang.LoginFlag;
@@ -88,46 +88,46 @@ public class ArticleInsertCommand {
     private String themaUrl; // 테마 URL
 
 
-    public static ArticleInsertCommand of(ArticleMsg articleMsg) {
+    public static ArticleInsertCommand of(ArticleBody articleBody) {
         ArticleInsertCommand command = ArticleInsertCommand
                 .builder()
-                .userId(articleMsg.getUserId())
-                .title(articleMsg.getTitle())
-                .writer(articleMsg.getWriter())
-                .desc(articleMsg.getDesc())
-                .dtype(DType.of(articleMsg.getDtype()))
-                .ip(articleMsg.getIp())
-                .lawFirmId(articleMsg.getLawFirmId())
-                .password(articleMsg.getPassword())
-                .postType(PostType.of(articleMsg.getPostType()))
-                .writerType(WriterType.of(articleMsg.getWriterType()))
-                .lineType(LineType.of(articleMsg.getLineType()))
-                .tierId(articleMsg.getTierId())
-                .judgeId(articleMsg.getJudgeId())
-                .subheading(articleMsg.getSubheading())
-                .plaintiffOpinion(articleMsg.getPlaintiffOpinion())
-                .defendantOpinion(articleMsg.getDefendantOpinion())
-                .plaintiffName(articleMsg.getPlaintiffName())
-                .defendantName(articleMsg.getDefendantName())
-                .playVideoUrl(articleMsg.getPlayVideoUrl())
-                .liveBroadcastUrl(articleMsg.getLiveBroadcastUrl())
-                .replayFileUrl(articleMsg.getReplayFileUrl())
-                .thumbnail(articleMsg.getThumbnail())
-                .precedent(PrecedentType.of(articleMsg.getPrecedent()))
-                .mainType(MainType.of(articleMsg.getMainType()))
-                .formType(FormType.of(articleMsg.getFormType()))
-                .loginFlag(LoginFlag.of(articleMsg.getLoginFlag()))
-                .maxRespondentCnt(articleMsg.getMaxRespondentCnt())
-                .logoUrl(articleMsg.getLogoUrl())
-                .themaUrl(articleMsg.getThemaUrl())
+                .userId(articleBody.getUserId())
+                .title(articleBody.getTitle())
+                .writer(articleBody.getWriter())
+                .desc(articleBody.getDesc())
+                .dtype(DType.of(articleBody.getDtype()))
+                .ip(articleBody.getIp())
+                .lawFirmId(articleBody.getLawFirmId())
+                .password(articleBody.getPassword())
+                .postType(PostType.of(articleBody.getPostType()))
+                .writerType(WriterType.of(articleBody.getWriterType()))
+                .lineType(LineType.of(articleBody.getLineType()))
+                .tierId(articleBody.getTierId())
+                .judgeId(articleBody.getJudgeId())
+                .subheading(articleBody.getSubheading())
+                .plaintiffOpinion(articleBody.getPlaintiffOpinion())
+                .defendantOpinion(articleBody.getDefendantOpinion())
+                .plaintiffName(articleBody.getPlaintiffName())
+                .defendantName(articleBody.getDefendantName())
+                .playVideoUrl(articleBody.getPlayVideoUrl())
+                .liveBroadcastUrl(articleBody.getLiveBroadcastUrl())
+                .replayFileUrl(articleBody.getReplayFileUrl())
+                .thumbnail(articleBody.getThumbnail())
+                .precedent(PrecedentType.of(articleBody.getPrecedent()))
+                .mainType(MainType.of(articleBody.getMainType()))
+                .formType(FormType.of(articleBody.getFormType()))
+                .loginFlag(LoginFlag.of(articleBody.getLoginFlag()))
+                .maxRespondentCnt(articleBody.getMaxRespondentCnt())
+                .logoUrl(articleBody.getLogoUrl())
+                .themaUrl(articleBody.getThemaUrl())
                 .build();
 
-        if (StringUtils.isNotBlank(articleMsg.getBeginDt())) {
-            command.beginDt = Timestamp.valueOf(articleMsg.getBeginDt());
+        if (StringUtils.isNotBlank(articleBody.getBeginDt())) {
+            command.beginDt = Timestamp.valueOf(articleBody.getBeginDt());
         }
 
-        if (StringUtils.isNotBlank(articleMsg.getEndDt())) {
-            command.endDt = Timestamp.valueOf(articleMsg.getEndDt());
+        if (StringUtils.isNotBlank(articleBody.getEndDt())) {
+            command.endDt = Timestamp.valueOf(articleBody.getEndDt());
         }
 
         return command;

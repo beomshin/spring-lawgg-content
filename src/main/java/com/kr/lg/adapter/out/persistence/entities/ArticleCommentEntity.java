@@ -39,10 +39,10 @@ public class ArticleCommentEntity extends BaseEntity {
     @Column(name = "writer")
     private String writer; // 작성자
 
-    @Column(name = "desc")
+    @Column(name = "`desc`")
     private String desc; // 디스크립션
 
-    @Column(name = "order")
+    @Column(name = "`order`")
     private Integer order; // 순번
 
     @Column(name = "depth")

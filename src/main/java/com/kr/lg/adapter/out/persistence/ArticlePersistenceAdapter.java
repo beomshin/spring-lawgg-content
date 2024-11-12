@@ -1,12 +1,15 @@
 package com.kr.lg.adapter.out.persistence;
 
 
+import com.kr.lg.adapter.out.persistence.entities.ArticleCommentEntity;
 import com.kr.lg.adapter.out.persistence.entities.ArticleFormEntity;
 import com.kr.lg.adapter.out.persistence.entities.ArticleLawggBoardEntity;
 import com.kr.lg.adapter.out.persistence.entities.ArticleLawggTrialEntity;
 import com.kr.lg.adapter.out.persistence.mapper.ArticleBoardMapper;
+import com.kr.lg.adapter.out.persistence.mapper.ArticleCommentMapper;
 import com.kr.lg.adapter.out.persistence.mapper.ArticleFormMapper;
 import com.kr.lg.adapter.out.persistence.mapper.ArticleTrialMapper;
+import com.kr.lg.adapter.out.persistence.repository.ArticleCommentJpaRepo;
 import com.kr.lg.adapter.out.persistence.repository.ArticleFormJpaRepo;
 import com.kr.lg.adapter.out.persistence.repository.ArticleLawggBoardJpaRepo;
 import com.kr.lg.adapter.out.persistence.repository.ArticleLawggTrialJpaRepo;
@@ -28,9 +31,11 @@ public class ArticlePersistenceAdapter implements InsertArticleBoardPort {
     private final ArticleBoardMapper articleBoardMapper;
     private final ArticleTrialMapper articleTrialMapper;
     private final ArticleFormMapper articleFormMapper;
+    private final ArticleCommentMapper articleCommentMapper;
     private final ArticleLawggBoardJpaRepo articleLawggBoardJpaRepo;
     private final ArticleLawggTrialJpaRepo articleLawggTrialJpaRepo;
     private final ArticleFormJpaRepo articleFormJpaRepo;
+    private final ArticleCommentJpaRepo articleCommentJpaRepo;
 
     @Override
     @Transactional
@@ -60,8 +65,12 @@ public class ArticlePersistenceAdapter implements InsertArticleBoardPort {
     }
 
     @Override
+    @Transactional
     public void insertArticleComment(ArticleComment comment) {
-
+        log.info("◆ 댓글 등록 영속성 로직 수행");
+        ArticleCommentEntity commentEntity = articleCommentMapper.mapToJpaEntity(comment);
+        log.info("◆ 댓글 게시판 영속성 엔티티 저장 수행");
+        articleCommentJpaRepo.save(commentEntity);
     }
 
 }
