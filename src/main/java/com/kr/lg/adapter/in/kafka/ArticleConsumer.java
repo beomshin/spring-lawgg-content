@@ -26,10 +26,12 @@ public class ArticleConsumer {
         try {
             log.info("◆ Article 카프카 메세지 consumer 시작");
             ArticleMsg articleMsg = new ObjectMapper().readValue(msg, ArticleMsg.class);
-            if (articleMsg.isArticle()) {
-                articleInsertUseCase.enroll(ArticleInsertCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleBody.class)));
-            } else if (articleMsg.isArticleComment()) {
-                articleInsertUseCase.enrollComment(ArticleCommentInsertCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleCommentMsg.class)));
+            if (articleMsg.isCreate()) {
+                if (articleMsg.isArticle()) {
+                    articleInsertUseCase.enroll(ArticleInsertCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleBody.class)));
+                } else if (articleMsg.isArticleComment()) {
+                    articleInsertUseCase.enrollComment(ArticleCommentInsertCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleCommentMsg.class)));
+                }
             }
             log.info("◆ Article 카프카 메세지 consumer 종료");
         } catch (Exception e) {

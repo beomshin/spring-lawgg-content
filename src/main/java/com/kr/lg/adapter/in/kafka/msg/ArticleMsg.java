@@ -21,7 +21,7 @@ public class ArticleMsg {
     @JsonIgnoreProperties(ignoreUnknown = true) // 미정의 메세지 컬럼 제외
     private static class Header {
         private Integer type; // 메세지 타입 ( 0: 로우지지 게시판 등록, 1: 로우지지 트라이얼 등록, 2 : 폼당 폼 등록)
-
+        private Integer crud; // CRUD 타입 (0: C, R: 1, U: 2, D:3)
     }
 
     public boolean isArticle() {
@@ -30,6 +30,11 @@ public class ArticleMsg {
 
     public boolean isArticleComment() {
         return header.getType() == 3;
+    }
+
+
+    public boolean isCreate() {
+        return header.getCrud() == 0;
     }
 
 }
