@@ -1,12 +1,14 @@
 package com.kr.lg.adapter.in.kafka;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kr.lg.adapter.in.kafka.msg.ArticleCommentMsg;
 import com.kr.lg.adapter.in.kafka.msg.ArticleBody;
 import com.kr.lg.adapter.in.kafka.msg.ArticleMsg;
+import com.kr.lg.application.port.in.ArticleDeleteUseCase;
 import com.kr.lg.application.port.in.ArticleInsertUseCase;
+import com.kr.lg.application.port.in.command.ArticleCommentDeleteCommand;
 import com.kr.lg.application.port.in.command.ArticleCommentInsertCommand;
+import com.kr.lg.application.port.in.command.ArticleDeleteCommand;
 import com.kr.lg.application.port.in.command.ArticleInsertCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class ArticleConsumer {
 
     private final ArticleInsertUseCase articleInsertUseCase;
+    private final ArticleDeleteUseCase articleDeleteUseCase;
 
     @KafkaListener(topics = "${kafka.topic.article.name}", groupId = "${kafka.consumer.group-id}", containerFactory = "containerFactory")
     public void enroll(String msg, Acknowledgment ack) { // offset 커밋 조절
@@ -31,6 +34,14 @@ public class ArticleConsumer {
                     articleInsertUseCase.enroll(ArticleInsertCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleBody.class)));
                 } else if (articleMsg.isArticleComment()) {
                     articleInsertUseCase.enrollComment(ArticleCommentInsertCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleCommentMsg.class)));
+                }
+            } else if (articleMsg.isUpdate()) {
+
+            } else if (articleMsg.isDelete()) {
+                if (articleMsg.isArticle()) {
+                    articleDeleteUseCase.delete(ArticleDeleteCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleBody.class)));
+                } else if (articleMsg.isArticleComment()) {
+                    articleDeleteUseCase.deleteComment(ArticleCommentDeleteCommand.of(new ObjectMapper().convertValue(articleMsg.getBody(), ArticleBody.class)));
                 }
             }
             log.info("◆ Article 카프카 메세지 consumer 종료");

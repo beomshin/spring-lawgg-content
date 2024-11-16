@@ -37,4 +37,12 @@ public class ArticleMsg {
         return header.getCrud() == 0;
     }
 
+    public boolean isUpdate() {
+        return header.getCrud() == 1;
+    }
+
+    public boolean isDelete() {
+        return header.getCrud() == 2;
+    }
+
 }
