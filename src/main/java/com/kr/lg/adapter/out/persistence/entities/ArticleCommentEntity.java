@@ -10,7 +10,7 @@ import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @SuperBuilder
-@ToString(callSuper=true, exclude = {"articleEntity"})
+@ToString(callSuper=true)
 @Entity(name = "article_commet")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

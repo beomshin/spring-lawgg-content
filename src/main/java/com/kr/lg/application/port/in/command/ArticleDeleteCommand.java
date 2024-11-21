@@ -7,7 +7,6 @@ import lombok.*;
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
 public class ArticleDeleteCommand {
 
     public static ArticleDeleteCommand of(ArticleBody articleBody) {
